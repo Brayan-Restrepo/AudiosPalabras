@@ -52,8 +52,8 @@ class AudioController extends Controller
 
 	public function create(Request $request){
 		$dato=$request->input('url'); //Aqui obtienes el valor del input ajax
-		//$dato="------";
-		if($dato==""){
+		
+		if($dato==null){
 			 return response()
         	->json("Dato Incopleto", 204);
 		}
