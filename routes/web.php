@@ -14,3 +14,6 @@
 Route::get('/', 'AudioController@index')->name('index');
 Route::get('/palabras/all', 'AudioController@palabrasAll')->name('palabrasAll');
 Route::get('/palabras', 'AudioController@palabras')->name('palabras');
+Route::get('/palabras', 'AudioController@palabras')->name('palabras');
+
+Route::post('/create/palabras', 'AudioController@create')->name('create');

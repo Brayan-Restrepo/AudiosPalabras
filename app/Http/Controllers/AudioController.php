@@ -16,19 +16,14 @@ class AudioController extends Controller
 	
     public function palabrasAll(Request $request)	{
     	
-		$audios = AudiosModel::all('palabra');
+		$audios = AudiosModel::all('audio', 'palabra');
 		print_r(count($audios)."\n");
-		$json = array();
-		foreach ($audios as $value) {
-			$json[] = ["palabra" => $value->palabra];	
-		}
-     	header('Access-Control-Allow-Origin: *'); 
-	    header("Access-Control-Allow-Credentials: true");
-	    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-	    header('Access-Control-Max-Age: 1000');
-	    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Authorization');
-         // The client-side application can set only headers allowed in Access-Control-Allow-Headers
-        return response($json, 200);
+		
+        return response()
+        	->json($audios, 200)
+        	->header('Content-Type', 'application/json')
+            ->header('X-Header-One', 'Header Value')
+            ->header('X-Header-Two', 'Header Value');;
 	}
 
 	public function palabras(Request $request)	{
@@ -46,16 +41,26 @@ class AudioController extends Controller
 	        $i++; 
 	    }
 		$audios = $temp_array;
-     	header('Access-Control-Allow-Origin: *'); 
-	    header("Access-Control-Allow-Credentials: true");
-	    header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-	    header('Access-Control-Max-Age: 1000');
-	    header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Authorization');
+     	
          // The client-side application can set only headers allowed in Access-Control-Allow-Headers
-        return response($audios, 200);
+        return response()
+        	->json($audios, 200)
+        	->header('Content-Type', 'application/json')
+            ->header('X-Header-One', 'Header Value')
+            ->header('X-Header-Two', 'Header Value');
 	}
 
-	public function addPalabras(){
-		
+	public function create(Request $request){
+		$dato=$request->input('url'); //Aqui obtienes el valor del input ajax
+		//$dato="------";
+		if($dato==""){
+			 return response()
+        	->json("Dato Incopleto", 204);
+		}
+        return response()
+        	->json($dato, 201)
+        	->header('Content-Type', 'application/json')
+            ->header('X-Header-One', 'Header Value')
+            ->header('X-Header-Two', 'Header Value');;
 	}
 }
